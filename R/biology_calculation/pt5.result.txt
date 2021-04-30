@@ -1,0 +1,62 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Attaching SeuratObject
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Centering and scaling data matrix
+  |                                                                              |                                                                      |   0%  |                                                                              |====                                                                  |   5%  |                                                                              |=======                                                               |  10%  |                                                                              |==========                                                            |  15%  |                                                                              |==============                                                        |  20%  |                                                                              |==================                                                    |  25%  |                                                                              |=====================                                                 |  30%  |                                                                              |========================                                              |  35%  |                                                                              |============================                                          |  40%  |                                                                              |================================                                      |  45%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================                                |  55%  |                                                                              |==========================================                            |  60%  |                                                                              |==============================================                        |  65%  |                                                                              |=================================================                     |  70%  |                                                                              |====================================================                  |  75%  |                                                                              |========================================================              |  80%  |                                                                              |============================================================          |  85%  |                                                                              |===============================================================       |  90%  |                                                                              |==================================================================    |  95%  |                                                                              |======================================================================| 100%
+PC_ 1 
+Positive:  CCL5, NKG7, TRBC2, IL32, KLRD1, CD7, PRF1, KLRB1, TRAC, TRBC1 
+	   CCL4, KLRG1, CD69, GZMH, GZMK, TXK, TRDC, GNLY, TRGC2, TRG-AS1 
+	   CD160, AC092580.4, IL7R, SPON2, NCR3, NUCB2, IL2RB, BCL2, DUSP2, CD8A 
+Negative:  AIF1, SPI1, LYZ, CST3, CD68, SERPINA1, MNDA, FCN1, CYBB, NCF2 
+	   CPVL, CLEC7A, CSTA, CFP, RNF144B, S100A9, LST1, LILRB2, MS4A7, CFD 
+	   KCTD12, PILRA, IGSF6, FPR1, HCK, LINC01272, CSF1R, MPEG1, MS4A6A, IRAK3 
+PC_ 2 
+Positive:  SRGN, NKG7, TYROBP, KLRD1, IFITM2, PRF1, CD7, CEBPD, CCL5, S100A4 
+	   FCGR3A, FCER1G, KLRB1, ID2, RHOC, GSTP1, CCL4, TRDC, ANXA1, KLRF1 
+	   GAPDH, CTSD, IFITM3, CMC1, ACTB, GNLY, SPON2, CD160, CLIC3, S100A10 
+Negative:  CD79A, MS4A1, IGHD, IGHM, TCL1A, BANK1, LINC00926, IGKC, FCRL1, RALGPS2 
+	   RP11-693J15.5, FAM129C, FCRLA, VPREB3, TNFRSF13C, AFF3, CD22, GNG7, ARHGAP24, HLA-DQA1 
+	   BCL11A, SPIB, CD24, FCER2, HLA-DOB, PAX5, BLNK, HLA-DQB1, POU2AF1, CD79B 
+PC_ 3 
+Positive:  KLRF1, FCER1G, TYROBP, CLIC3, KLRD1, CMC1, IL2RB, CD38, CD160, GSTP1 
+	   CCL3, NKG7, CD7, XCL2, LAT2, CCL4, CEBPD, TRDC, SH2D1B, AOAH 
+	   TXK, XCL1, IFITM2, PTPN12, PLAC8, TOX2, IRF8, SRGN, PLEK, PRF1 
+Negative:  IL7R, TRAC, LTB, IL32, CD52, S100A6, VIM, S100A4, TRAT1, RCAN3 
+	   AQP3, MAL, BCL2, TOB1, LDHB, CD40LG, CAMK4, CXCR4, RGS10, INPP4B 
+	   DPP4, LGALS3, TNFRSF25, GPR171, PAG1, SLAMF1, CISH, TRABD2A, GPR183, PLP2 
+PC_ 4 
+Positive:  FGFBP2, GNLY, ZEB2, GZMB, PLCG2, GZMH, FCGR3A, CX3CR1, ADGRG1, MTSS1 
+	   PRSS23, SPON2, PATL2, C1orf21, LAIR2, ASCL2, CEP78, CES1, KLF2, ITGAX 
+	   SLC11A1, LILRB1, AHNAK, PRF1, CD52, KLRG1, LGALS1, AKR1C3, KLRD1, NKG7 
+Negative:  FOS, DUSP1, HSP90AB1, DNAJB1, JUNB, CD69, HSPA1B, JUN, FOSB, JUND 
+	   HSPA1A, HSP90AA1, PPP1R15A, HSPE1, HSPD1, DNAJA1, BTG2, ZFP36, NFKBIA, RPLP1 
+	   SRGN, IER2, LTB, GZMK, NR4A2, RPLP0, UBC, HSPH1, CTD-3252C9.4, AREG 
+PC_ 5 
+Positive:  CD163, VCAN, CD14, CSF3R, SLC1A3, MS4A6A, GZMK, F13A1, PLCG2, CD36 
+	   S100A12, AOAH, TXK, CPM, CXCR6, FMN1, TNFAIP2, ENTPD1, CLEC4E, CD93 
+	   S100A8, NAIP, MRC1, TOX2, TTN, TFEC, STAB1, IL13RA1, CREB5, BCO2 
+Negative:  CD52, S100A4, FGFBP2, GZMB, RPS12, KLF2, RPS8, S100A6, FCGR3A, ACTB 
+	   S100A10, GAPDH, RPLP1, ACTG1, GNLY, ANXA1, C12orf75, RPLP0, FTH1, GZMH 
+	   LGALS1, CX3CR1, PRSS23, FTL, IFITM2, VIM, ANXA2, CD37, HMGN2, NKG7 

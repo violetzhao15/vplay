@@ -1,0 +1,83 @@
+library(dplyr)
+library(Seurat)
+library(ggplot2)
+library(SCORPIUS)
+
+#for loading data
+#setwd("C:/Users/jorda/Desktop")
+#TC <- readRDS("SingleCellRNASequencing_TAZ-CAMTA1_ECs/TC_final.rds")
+
+#for pseudotime
+#cells.use <- WhichCells(object = TC, ident = c("EC1", "EC2", "EC3", "Cap A", "vECs", "EC4", "aECs", "lECs", "EC5"))
+#expr <- GetAssayData(object = TC, assay.type = "RNA", slot = "data")[, cells.use]
+#expr <- as(Class = 'matrix', object = expr)
+#write.csv(x = expr, file = "expression_clusters2.csv", quote = FALSE)
+#expression_clusters2 <- read_csv("expression_clusters2.csv")
+#TC.label <- FetchData(TC, "ident", cells.use)
+
+setwd("C:/Users/jorda/Desktop")
+data.dir <- "SingleCellRNASequencing_TAZ-CAMTA1_ECs/filtered_feature_bc_matrix"
+ecs<- Read10X(data.dir)
+TC <- CreateSeuratObject(counts = ecs, project = "TC_ECs", min.cells = 3, min.features = 200)
+TC[["percent.mt"]] <- PercentageFeatureSet(TC, pattern = "^mt-")
+TC <- subset(TC, subset = nFeature_RNA > 200 & nFeature_RNA < 4000 & percent.mt < 5)
+TC <- NormalizeData(TC, normalization.method = "LogNormalize", scale.factor = 10000)
+TC <- FindVariableFeatures(TC, selection.method = "vst", nfeatures = 2000)
+all.genes <- rownames(TC)
+TC <- ScaleData(TC, features = all.genes)
+TC <- RunPCA(TC, features = VariableFeatures(object = TC))
+
+# TC <- JackStraw(TC, dims = 50, num.replicate = 100)
+# TC <- ScoreJackStraw(TC, dims = 1:50)
+# JackStrawPlot(TC, dims = 1:50)
+# Elbowplot seems to have an elbow around 30. Not much change after that 20-30 are very variable as well. But we'll be safe.
+
+TC <- FindNeighbors(TC, dims = 1:30)
+TC <- FindClusters(TC, resolution = 0.6)
+TC <- RunTSNE(TC, dims = 1:30)
+
+new.cluster.ids <- c("Immature", "Interferon", "Pre-Proliferative", "Capillaries", "Veins", "Proliferative", "Arteries", "Immune cells", "Lymphatics", "Immature/Interferon")
+names(new.cluster.ids) <- levels(TC)
+TC <- RenameIdents(TC, new.cluster.ids)
+DimPlot(TC, label = TRUE, pt.size = 3) + NoLegend()
+
+#DimPlot(TC, pt.size = 5, cols = c('Immature'='deepskyblue4', "Interferon"='forestgreen', 'Pre-Proliferative'='orange', 'Capillaries'='yellow2', 'Veins'='lightsteelblue2', 'Proliferative'='firebrick', 'Arteries'='lightpink2', 'Immune cells'='gray', 'Lymphatics'='black', 'Immature/Interferon'='purple'))+theme(text=element_text(size=12,  family="Arial"))
+
+
+# To make heat map
+#TC.markers <- FindAllMarkers(TC, only.pos = TRUE, min.pct = 0.25, logfc.threshold = 0.25)
+#top5 <- TC.markers %>% group_by(cluster) %>% top_n(n = 5, wt = avg_logFC)
+#DoHeatmap(TC, features = top5$gene, size = 3) + NoLegend() + scale_fill_gradientn(colors = c("blue", "white", "red"))
+
+#for cell cycle scoring
+#library(stringr)
+#s.genes <- cc.genes$s.genes
+#g2m.genes <- cc.genes$g2m.genes
+#s.genes <- str_to_title(s.genes)
+#g2m.genes <- str_to_title(g2m.genes)
+#TC <- CellCycleScoring(TC, s.features = s.genes, g2m.features = g2m.genes, set.ident = TRUE)
+#FeaturePlot(TC, features = c("S.Score", "G2M.Score"), cols = c("dodgerblue", "yellow", "red"), pt.size = 1.5)
+
+#To make dot plot
+#top10 <- TC.markers %>% group_by(cluster) %>% top_n(n = 10, Dotwt = avg_logFC)
+#DotPlot(TC, features = top3$gene, cols = c("Blue", "Red")) + coord_flip() + theme(axis.text.x = element_text(angle=90, hjust=1))
+
+# for Pseudotime
+#writing CSV file
+#cells.use <- WhichCells(TC, ident = c("EC2", "EC5", "vECs"))
+#expr <- GetAssayData(TC, assay.type = "RNA", slot = "data")[, cells.use]
+#expr <- as(Class = 'matrix', object = expr)
+#write.csv(x = expr, file = "expression_clusters.csv", quote = FALSE)
+
+# Import data set of ClusterEC4
+#g <- ggplot(ClusterEC4,aes(x=avg_logFC, y =newcolumn,
+# colour=threshold)) +
+# geom_point(alpha=0.6, size=1) +
+# xlim(c(-2, 2)) +
+#  xlab("log2 fold change") + ylab("-log10 P") +
+# theme_bw() +
+# scale_color_manual(values = c("black", "red")) +
+# theme(legend.position="none")
+# g+ geom_text_repel(data = subset(ClusterEC4, p_val_adj < 0.001 & abs(avg_logFC)>1),
+#+ aes(label = Gene),
+#+ size = 3)
